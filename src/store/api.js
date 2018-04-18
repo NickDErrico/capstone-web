@@ -5,11 +5,12 @@ import axios from 'axios'
 const url = 'localhost:8000'
 
 export default {
-  getPatientss: function (state, cb) {
-    axios.get(`${url}/patients`)
+  getPatients: function (state, cb) {
+    axios.get(`http://${url}/patients`)
       .then((res) => {
         if(res.status >= 200 && res.status < 300) {
-          cb(res.data.data.children)
+          console.log("ello ",res)
+          cb(res.data)
         }
       })
       .catch((error) => {
