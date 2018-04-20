@@ -53,7 +53,6 @@ import Icon from 'vue-awesome/components/Icon.vue';
       this.$store.store.dispatch(GET_PATIENTS).catch(() => {
         this.$router.push("/");
       })
-      console.log(this.$store.store.state);
     },
     components: {
       Icon
@@ -65,5 +64,5 @@ import Icon from 'vue-awesome/components/Icon.vue';
   #patient-list {
     margin-top: 45%;
   }
-  
+
 </style>

@@ -1,4 +1,4 @@
-import {LOGIN_DOCTOR, REGISTER_DOCTOR, GET_PATIENTS, CHECK_DOCTOR, LOGOUT_DOCTOR} from "./mutation-types";
+import {LOGIN_DOCTOR, REGISTER_DOCTOR, GET_PATIENTS, CHECK_DOCTOR, LOGOUT_DOCTOR, LOGOUT} from "./mutation-types";
 export const mutations = {
 
   [REGISTER_DOCTOR](state, payload) {
@@ -18,10 +18,9 @@ export const mutations = {
   [GET_PATIENTS](state, payload) {
     state.patients = payload;
   },
-  // [LOGOUT](state) {
-  //   state.loggedIn = false
-  //   state.token = null
-  //   localStorage.removeItem('doctor')
-  //   router.push({path: '/'})
-  // }
+  [LOGOUT](state) {
+    state.loggedIn = false
+    state.doctor = {};
+    localStorage.removeItem('doctor')
+  }
 };

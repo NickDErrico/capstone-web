@@ -18,7 +18,7 @@
           <icon name="notes-medical"></icon>
           <v-list-tile-title>Notes</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile @click="logout">
           <icon name="sign-out-alt"></icon>
           <v-list-tile-title>Sign out</v-list-tile-title>
         </v-list-tile>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import { CHECK_DOCTOR, LOGOUT_DOCTOR } from "./store/mutation-types";
+  import { CHECK_DOCTOR, LOGOUT } from "./store/mutation-types";
   import { store } from './store/store';
   export default {
     data: () => ({
@@ -60,6 +60,13 @@
         this.$store.store.dispatch(CHECK_DOCTOR, token)
       }
     },
+    methods:{
+      logout:function(){
+        this.$store.store.dispatch(LOGOUT).then(()=>{
+          this.$router.push("/")
+        });
+      }
+    }
   }
 </script>
 

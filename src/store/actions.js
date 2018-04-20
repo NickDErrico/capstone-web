@@ -56,8 +56,11 @@ export const actions = {
     })
   },
 
-  // [LOGOUT](context) {
-  //   localStorage.removeItem("token");
-  //   context.commit(LOGOUT);
-  // }
+  [LOGOUT](context) {
+    return new Promise((resolve, reject)=>{
+      localStorage.removeItem("doctor");
+      context.commit(LOGOUT);
+      resolve();
+    })
+  }
 };
