@@ -18,10 +18,10 @@ export const mutations = {
   [GET_PATIENTS](state, payload) {
     state.patients = payload;
   },
-  [LOGOUT_DOCTOR](state) {
-    state.loggedIn = false
-    state.token = null
-    localStorage.removeItem('doctor')
-    router.push({path: '/'})
-  }
+  // [LOGOUT](state) {
+  //   state.loggedIn = false
+  //   state.token = null
+  //   localStorage.removeItem('doctor')
+  //   router.push({path: '/'})
+  // }
 };

@@ -2,7 +2,7 @@
   <v-layout row id="patient-list">
    <v-flex xs8 sm8  offset-sm2>
      <v-card>
-       <v-toolbar  color="blue darken-1" dark>
+       <v-toolbar color="blue darken-1" dark>
          <v-toolbar-title>Patients</v-toolbar-title>
          <v-spacer></v-spacer>
            <v-flex sm4 md 6>
@@ -63,6 +63,7 @@ import Icon from 'vue-awesome/components/Icon.vue';
 
 <style lang="scss">
   #patient-list {
-    margin-top: 5%;
+    margin-top: 45%;
   }
+  
 </style>

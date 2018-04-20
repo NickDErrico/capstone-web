@@ -3,18 +3,23 @@
     <v-navigation-drawer v-if="doctor" clipped v-model="drawer" app dark class="blue darken-2">
       <v-list dense>
         <v-list-tile @click="$router.push('/patients')">
+          <icon name="users"></icon>
           <v-list-tile-title>Patients</v-list-tile-title>
         </v-list-tile>
         <v-list-tile @click="$router.push('/labs')">
+          <icon name="flask"></icon>
           <v-list-tile-title>Labs</v-list-tile-title>
         </v-list-tile>
         <v-list-tile @click="$router.push('/appointments')">
+          <icon name="calendar-check"></icon>
           <v-list-tile-title>Appointments</v-list-tile-title>
         </v-list-tile>
         <v-list-tile @click="$router.push('/notes')">
+          <icon name="notes-medical"></icon>
           <v-list-tile-title>Notes</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="logoutDoctor()">
+        <v-list-tile @click="">
+          <icon name="sign-out-alt"></icon>
           <v-list-tile-title>Sign out</v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -55,12 +60,6 @@
         this.$store.store.dispatch(CHECK_DOCTOR, token)
       }
     },
-    methods:{
-      logoutDoctor() {
-        let token = localStorage.removeItem("doctor");
-        this.$store.store.dispatch(LOGOUT_DOCTOR);
-      }
-    }
   }
 </script>
 
@@ -83,4 +82,22 @@
   width:0 !important;
 }
 
+.list--dense .list__tile {
+    font-size: 20px;
+}
+
+.navigation-drawer .list__tile__title {
+    height: 3em;
+    line-height: 3em;
+    position: relative;
+    text-align: center;
+}
+
+.fa-icon {
+  margin-left: 1em;
+  width: auto;
+  height: 1.5em;
+  max-width: 1.5em;
+  max-height: 1.5em;
+}
 </style>
