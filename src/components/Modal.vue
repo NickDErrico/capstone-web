@@ -47,7 +47,7 @@
 
 <script>
   import axios from "axios";
-  import api from '../store/api';
+  import {LOGIN_USER, REGISTER_USER} from "../store/mutation-types";
   export default {
     data: () => ({
       dialog: false,
@@ -63,7 +63,22 @@
         password: ""
       }
     }),
-    mixins: [api]
+    methods:{
+      login:function(){
+        this.$store.store.dispatch(LOGIN_USER, this.loginDoctor).then(()=>{
+          console.log("done!");
+          this.dialog = false;
+          this.$router.push("/profile");
+        });
+      },
+      register: function(){
+        this.$store.store.dispatch(REGISTER_USER, this.registerDoctor).then(()=>{
+          console.log("done!");
+          this.dialog = false;
+          this.$router.push("/profile");
+        });
+      }
+    }
   }
 </script>
 

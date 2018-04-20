@@ -3,39 +3,51 @@
     <v-navigation-drawer clipped v-model="drawer" app dark class="blue darken-2">
       <v-list dense>
         <v-list-tile @click="$router.push('/')"  v-if="!loggedIn">
-          <v-list-tile-title>Login</v-list-tile-title>
+          <v-list-tile-title>Log in</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="$router.push('/profile')"  v-if="loggedIn">
+        <v-list-tile @click="$router.push('/profile')"  v-if="!loggedIn">
           <v-list-tile-title>Profile</v-list-tile-title>
         </v-list-tile>
+        <!-- <v-list-tile @click="$router.push('/profile')"  v-if="loggedIn">
+          <v-list-tile-title>Profile</v-list-tile-title>
+        </v-list-tile> -->
         <v-list-tile @click="$router.push('/')"  v-if="loggedIn">
-          <v-list-tile-title>Signout</v-list-tile-title>
+          <v-list-tile-title>Sign out</v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="blue darken-3" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer">&#9776;</v-toolbar-side-icon>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"><icon name="bars"></icon></v-toolbar-side-icon>
       <v-toolbar-title>Health App</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height fill-width>
         <v-layout justify-center align-center>
-            <router-view></router-view>
+            <router-view ></router-view>
         </v-layout>
       </v-container>
     </v-content>
     <v-footer color="white" app>
+      <v-spacer></v-spacer>
       <span class="black--text">&copy; Nick D'Errico 2018</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+  import { CHECK_DOCTOR } from "./store/mutation-types";
   export default {
     data: () => ({
       drawer: false,
       loggedIn: true
     }),
+
+    created(){
+      let token = localStorage.getItem("doctor");
+      if(token){
+        this.$store.store.dispatch(CHECK_DOCTOR, token)
+      }
+    }
   }
 </script>
 
