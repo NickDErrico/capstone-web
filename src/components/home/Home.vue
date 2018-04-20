@@ -1,18 +1,23 @@
 <template>
   <div id="home">
     <h1 id="title">Health App</h1>
-    <h1>Helping you understand your health</h1>
+    <h1>Helping you connect with your patients</h1>
+    <Modal />
   </div>
 </template>
 
-<style lang="scss">
-  #home {
-    margin-top: 10%;
-    text-align: center;
-  }
+<script>
+import Modal from '../../components/Modal.vue';
 
+export default {
+  components: {
+    Modal,
+  }
+}
+</script>
+
+<style lang="scss">
   #title {
     font-size: 4em;
   }
-
 </style>

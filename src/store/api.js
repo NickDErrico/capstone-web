@@ -1,21 +1,35 @@
-import axios from 'axios'
+import axios from 'axios';
+import router from 'vue-router';
 
 //Define API request URL and request process
 
-const url = 'localhost:8000'
+const url = 'http://localhost:8000'
 
 export default {
-  getPatients: function (state, cb) {
-    axios.get(`http://${url}/patients`)
-      .then((res) => {
-        if(res.status >= 200 && res.status < 300) {
-          console.log("ello ",res)
-          cb(res.data)
-        }
-      })
-      .catch((error) => {
-        return Promise.reject(error)
-      })
-  },
+  methods: {
+    login: function(loginDoctor) {
+      axios.post(`${url}/login`, loginDoctor)
+        .then((result) => {
+          console.log(result);
+          this.dialog = false;
+          localStorage.setItem("token", result.data.token);
+          // window.location.href = '/profile'
+        }).catch((e) => {
+          console.log(e);
+        })
+    },
+
+    register: function(registerDoctor) {
+      axios.post(`${url}/register`, registerDoctor)
+        .then((result) => {
+          console.log(result);
+          this.dialog = false;
+          localStorage.setItem("token", result.data.token);
+          router.forward('/profile')
+        }).catch(() => {
+          console.log("failed");
+        })
+    }
+  }
 
 }

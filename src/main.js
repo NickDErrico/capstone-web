@@ -4,6 +4,7 @@ import App from './App.vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css'
 import { routes } from './routes';
+import { store } from '../src/store/store';
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
