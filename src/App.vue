@@ -1,17 +1,20 @@
 <template>
   <v-app id="app">
-    <v-navigation-drawer clipped v-model="drawer" app dark class="blue darken-2">
+    <v-navigation-drawer v-if="doctor" clipped v-model="drawer" app dark class="blue darken-2">
       <v-list dense>
-        <v-list-tile @click="$router.push('/')"  v-if="!loggedIn">
-          <v-list-tile-title>Log in</v-list-tile-title>
+        <v-list-tile @click="$router.push('/patients')">
+          <v-list-tile-title>Patients</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="$router.push('/profile')"  v-if="!loggedIn">
-          <v-list-tile-title>Profile</v-list-tile-title>
+        <v-list-tile @click="$router.push('/labs')">
+          <v-list-tile-title>Labs</v-list-tile-title>
         </v-list-tile>
-        <!-- <v-list-tile @click="$router.push('/profile')"  v-if="loggedIn">
-          <v-list-tile-title>Profile</v-list-tile-title>
-        </v-list-tile> -->
-        <v-list-tile @click="$router.push('/')"  v-if="loggedIn">
+        <v-list-tile @click="$router.push('/appointments')">
+          <v-list-tile-title>Appointments</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="$router.push('/notes')">
+          <v-list-tile-title>Notes</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="logoutDoctor()">
           <v-list-tile-title>Sign out</v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -23,7 +26,7 @@
     <v-content>
       <v-container fluid fill-height fill-width>
         <v-layout justify-center align-center>
-            <router-view ></router-view>
+          <router-view></router-view>
         </v-layout>
       </v-container>
     </v-content>
@@ -35,17 +38,27 @@
 </template>
 
 <script>
-  import { CHECK_DOCTOR } from "./store/mutation-types";
+  import { CHECK_DOCTOR, LOGOUT_DOCTOR } from "./store/mutation-types";
+  import { store } from './store/store';
   export default {
     data: () => ({
       drawer: false,
-      loggedIn: true
     }),
-
-    created(){
+    computed:{
+      doctor() {
+        return this.$store.store.getters.doctor;
+      }
+    },
+    created() {
       let token = localStorage.getItem("doctor");
       if(token){
         this.$store.store.dispatch(CHECK_DOCTOR, token)
+      }
+    },
+    methods:{
+      logoutDoctor() {
+        let token = localStorage.removeItem("doctor");
+        this.$store.store.dispatch(LOGOUT_DOCTOR);
       }
     }
   }

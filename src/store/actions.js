@@ -1,13 +1,13 @@
-import {LOGIN_USER, REGISTER_USER, GET_PATIENTS, CHECK_DOCTOR} from "./mutation-types";
+import {LOGIN_DOCTOR, REGISTER_DOCTOR, GET_PATIENTS, CHECK_DOCTOR} from "./mutation-types";
 const url = "http://localhost:8000";
 import axios from "axios";
 export const actions = {
   // Context is store itself and payload is the data
-  [LOGIN_USER](context, payload) {
+  [LOGIN_DOCTOR](context, payload) {
     return new Promise((resolve, reject) => {
       axios.post(`${url}/login`, payload)
         .then((result) => {
-          context.commit(LOGIN_USER, result.data)
+          context.commit(LOGIN_DOCTOR, result.data)
           resolve();
         }).catch((e) => {
           console.log(e);
@@ -15,12 +15,12 @@ export const actions = {
     })
   },
 
-  [REGISTER_USER](context, payload) {
+  [REGISTER_DOCTOR](context, payload) {
     return new Promise((resolve, reject) => {
       console.log("running");
       axios.post(`${url}/register`, payload)
         .then((result) => {
-          context.commit(REGISTER_USER, result.data)
+          context.commit(REGISTER_DOCTOR, result.data)
           resolve();
         }).catch(() => {
           console.log("failed");
@@ -54,6 +54,6 @@ export const actions = {
         reject()
       })
     })
-  }
+  },
 
 };

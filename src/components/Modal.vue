@@ -47,7 +47,7 @@
 
 <script>
   import axios from "axios";
-  import {LOGIN_USER, REGISTER_USER} from "../store/mutation-types";
+  import {LOGIN_DOCTOR, REGISTER_DOCTOR} from "../store/mutation-types";
   export default {
     data: () => ({
       dialog: false,
@@ -65,17 +65,17 @@
     }),
     methods:{
       login:function(){
-        this.$store.store.dispatch(LOGIN_USER, this.loginDoctor).then(()=>{
+        this.$store.store.dispatch(LOGIN_DOCTOR, this.loginDoctor).then(()=>{
           console.log("done!");
           this.dialog = false;
-          this.$router.push("/profile");
+          this.$router.push("/patients");
         });
       },
       register: function(){
-        this.$store.store.dispatch(REGISTER_USER, this.registerDoctor).then(()=>{
+        this.$store.store.dispatch(REGISTER_DOCTOR, this.registerDoctor).then(()=>{
           console.log("done!");
           this.dialog = false;
-          this.$router.push("/profile");
+          this.$router.push("/patients");
         });
       }
     }

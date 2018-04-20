@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
     token: "",
     doctor:{
     },
-    patients: []
+    patients: [],
+    loggedIn: false
   },
   mutations,
   getters,

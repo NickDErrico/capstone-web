@@ -1,12 +1,12 @@
-import {LOGIN_USER, REGISTER_USER, GET_PATIENTS, CHECK_DOCTOR} from "./mutation-types";
+import {LOGIN_DOCTOR, REGISTER_DOCTOR, GET_PATIENTS, CHECK_DOCTOR, LOGOUT_DOCTOR} from "./mutation-types";
 export const mutations = {
 
-  [REGISTER_USER](state, payload) {
+  [REGISTER_DOCTOR](state, payload) {
     localStorage.setItem("doctor", payload.token);
     state.token = payload.token;
     state.doctor = payload.doctor;
   },
-  [LOGIN_USER](state, payload) {
+  [LOGIN_DOCTOR](state, payload) {
     localStorage.setItem("doctor", payload.token);
     state.token = payload.token;
     state.doctor = payload.doctor;
@@ -17,5 +17,11 @@ export const mutations = {
   },
   [GET_PATIENTS](state, payload) {
     state.patients = payload;
+  },
+  [LOGOUT_DOCTOR](state) {
+    state.loggedIn = false
+    state.token = null
+    localStorage.removeItem('doctor')
+    router.push({path: '/'})
   }
 };
