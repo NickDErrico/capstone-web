@@ -1,8 +1,8 @@
 <template>
   <v-layout row id="patient-list">
-   <v-flex xs8 sm8  offset-sm2>
+   <v-flex xs9 sm9 md9 lg9>
      <v-card>
-       <v-toolbar color="blue darken-1" dark>
+       <v-toolbar color="blue darken-3" dark>
          <v-toolbar-title>Patients</v-toolbar-title>
          <v-spacer></v-spacer>
            <v-flex sm4 md 6>
@@ -21,8 +21,16 @@
            <v-divider v-if="item.divider"  :key="index"></v-divider>
            <v-list-tile :key="item.id" @click="">
              <v-list-tile-content>
-               <v-list-tile-title>{{item.first_name}}  {{item.last_name}}</v-list-tile-title>
+               <v-list-tile-title id="patient-name">{{item.first_name}}  {{item.last_name}}
+                 <span>
+                   <icon name="flask" onclick=""></icon>
+                   <icon name="chart-line" onclick=""></icon>
+                   <icon name="notes-medical" onclick=""></icon>
+                   <icon name="edit" onclick=""></icon>
+                 </span>
+               </v-list-tile-title>
                <v-list-tile-sub-title v-html="item.email"></v-list-tile-sub-title>
+               <v-divider></v-divider>
              </v-list-tile-content>
            </v-list-tile>
          </template>
@@ -62,7 +70,7 @@ import Icon from 'vue-awesome/components/Icon.vue';
 
 <style lang="scss">
   #patient-list {
-    margin-top: 45%;
+    position: relative;
   }
 
 </style>

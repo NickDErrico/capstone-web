@@ -7,9 +7,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     token: "",
-    doctor:{
-    },
+    doctor:{},
     patients: [],
+    testResults: [],
   },
   mutations,
   getters,

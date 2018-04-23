@@ -5,6 +5,10 @@ export const getters = {
 
   patients: (state) => {
     return state.patients.length > 0 ? state.patients : false;
+  },
+
+  testResults: (state) => {
+    return state.testResults.length > 0 ? state.testResults : false;
   }
 
 };

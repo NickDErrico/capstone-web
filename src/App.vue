@@ -3,8 +3,12 @@
     <v-navigation-drawer v-if="doctor" clipped v-model="drawer" app dark class="blue darken-2">
       <v-list dense>
         <v-list-tile @click="$router.push('/patients')">
-          <icon name="users"></icon>
-          <v-list-tile-title>Patients</v-list-tile-title>
+          <v-list-tile-action>
+            <icon name="users"></icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Patients</v-list-tile-title>
+          </v-list-tile-content>
         </v-list-tile>
         <v-list-tile @click="$router.push('/labs')">
           <icon name="flask"></icon>
