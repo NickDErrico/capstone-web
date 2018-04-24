@@ -20,4 +20,9 @@ export default {
   #title {
     font-size: 4em;
   }
+
+  #home {
+    margin-top: 17.5%;
+    margin-left: 34%;
+  }
 </style>

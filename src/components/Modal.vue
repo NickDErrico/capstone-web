@@ -22,6 +22,10 @@
               </v-flex>
               <v-flex xs12 v-if="!hasAccount">
                 <v-text-field label="Password" type="password" v-model="registerDoctor.password" required></v-text-field>
+              <v-flex xs12 v-if="!hasAccount">
+                <v-text-field label="Confirm Password" type="password" v-model="registerDoctor.confirmPassword" required></v-text-field>
+              </v-flex>
+              <v-alert type="error" :value="registerFormError.show">{{registerFormError.message}}</v-alert>
               </v-flex>
               <v-flex xs12 v-if="hasAccount">
                 <v-text-field label="Email" v-model="loginDoctor.email" required></v-text-field>
@@ -29,6 +33,7 @@
               <v-flex xs12 v-if="hasAccount">
                 <v-text-field label="Password" type="password" v-model="loginDoctor.password" required></v-text-field>
               </v-flex>
+              <v-alert type="error" :value="loginFormError.show">{{loginFormError.message}}</v-alert>
             </v-form>
           </v-container>
           <small>*indicates required field</small>
@@ -36,7 +41,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="dialog = !dialog">Cancel</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="() => !hasAccount ? register(registerDoctor) : login(loginDoctor)">Submit</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="submit">Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -55,28 +60,54 @@
       registerDoctor: {
         email: "",
         password: "",
+        confirmPassword: "",
         first_name: "",
         last_name: "",
       },
       loginDoctor: {
         email: "",
         password: ""
+      },
+      registerFormError: {
+        show: false,
+        message: "passwords do not match"
+      },
+      loginFormError: {
+        show: false,
+        message: "invalid password"
       }
     }),
-    methods:{
-      login:function(){
+    methods: {
+      login:function() {
         this.$store.store.dispatch(LOGIN_DOCTOR, this.loginDoctor).then(()=>{
           console.log("done!");
           this.dialog = false;
           this.$router.push("/patients");
         });
       },
-      register: function(){
+      register: function() {
         this.$store.store.dispatch(REGISTER_DOCTOR, this.registerDoctor).then(()=>{
           console.log("done!");
           this.dialog = false;
           this.$router.push("/patients");
         });
+      },
+      submit: function() {
+        if(!this.hasAccount) {
+          if(this.registerDoctor.password === this.registerDoctor.confirmPassword) {
+            this.register(this.registerDoctor)
+          }
+          else {
+            this.registerFormError.show = true;
+          }
+        }else {
+            this.login(this.loginDoctor)
+        }
+      }
+    },
+    computed: {
+      matchPassword: function () {
+        return this.password === this.confirmPassword
       }
     }
   }

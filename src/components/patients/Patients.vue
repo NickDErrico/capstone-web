@@ -1,6 +1,6 @@
 <template>
   <v-layout row id="patient-list">
-   <v-flex xs9 sm9 md9 lg9>
+   <v-flex xs10 sm10 md10 lg10>
      <v-card>
        <v-toolbar color="blue darken-3" dark>
          <v-toolbar-title>Patients</v-toolbar-title>
@@ -49,9 +49,6 @@ import Icon from 'vue-awesome/components/Icon.vue';
         searchbar: false
       }
     },
-    methods: {
-
-    },
     computed:{
       patients() {
         return this.$store.store.getters.patients;
@@ -61,16 +58,10 @@ import Icon from 'vue-awesome/components/Icon.vue';
       this.$store.store.dispatch(GET_PATIENTS).catch(() => {
         this.$router.push("/");
       })
-    },
-    components: {
-      Icon
     }
   }
 </script>
 
 <style lang="scss">
-  #patient-list {
-    position: relative;
-  }
 
 </style>

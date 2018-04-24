@@ -3,38 +3,38 @@
     <v-navigation-drawer v-if="doctor" clipped v-model="drawer" app dark class="blue darken-2">
       <v-list dense>
         <v-list-tile @click="$router.push('/patients')">
-          <v-list-tile-action>
-            <icon name="users"></icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Patients</v-list-tile-title>
-          </v-list-tile-content>
+            <v-icon center color="white">people</v-icon>
+            <v-list-tile-title left>Patients</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="$router.push('/labs')">
-          <icon name="flask"></icon>
+        <v-list-tile @click="$router.push('/labstable')">
+          <v-icon center color="white">local_hospital</v-icon>
           <v-list-tile-title>Labs</v-list-tile-title>
         </v-list-tile>
+        <v-list-tile @click="$router.push('/charts')">
+          <v-icon center color="white">show_chart</v-icon>
+          <v-list-tile-title>Charts</v-list-tile-title>
+        </v-list-tile>
         <v-list-tile @click="$router.push('/appointments')">
-          <icon name="calendar-check"></icon>
+          <v-icon color="white">perm_contact_calendar</v-icon>
           <v-list-tile-title>Appointments</v-list-tile-title>
         </v-list-tile>
         <v-list-tile @click="$router.push('/notes')">
-          <icon name="notes-medical"></icon>
+          <v-icon color="white">assignment</v-icon>
           <v-list-tile-title>Notes</v-list-tile-title>
         </v-list-tile>
         <v-list-tile @click="logout">
-          <icon name="sign-out-alt"></icon>
+          <v-icon color="white">exit_to_app</v-icon>
           <v-list-tile-title>Sign out</v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="blue darken-3" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"><icon name="bars"></icon></v-toolbar-side-icon>
+    <v-toolbar clipped-left color="blue darken-3" dark fixed app>
+      <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"><icon name="bars"></icon></v-toolbar-side-icon> -->
       <v-toolbar-title>Health App</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height fill-width>
-        <v-layout justify-center align-center>
+        <v-layout>
           <router-view></router-view>
         </v-layout>
       </v-container>
@@ -51,7 +51,7 @@
   import { store } from './store/store';
   export default {
     data: () => ({
-      drawer: false,
+      drawer: true,
     }),
     computed:{
       doctor() {
@@ -84,9 +84,8 @@
   color: #2c3e50;
 }
 
-.footer {
-  background-color: #1598AF;
-  color: white;
+.toolbar__title {
+  margin-left: 8%;
 }
 
 .navigation-drawer__border {
@@ -104,10 +103,10 @@
     text-align: center;
 }
 
-.fa-icon {
-  margin-left: 1em;
+i {
+  margin-left: .5em;
   width: auto;
-  height: 1.5em;
+  height: 1em;
   max-width: 1.5em;
   max-height: 1.5em;
 }
