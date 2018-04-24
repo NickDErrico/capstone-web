@@ -32,6 +32,10 @@
                <v-icon dark color="primary" slot="activator" @click="">edit</v-icon>
                <span>Edit</span>
               </v-tooltip>
+              <v-tooltip bottom>
+               <v-icon dark color="primary" slot="activator" @click="">delete</v-icon>
+               <span>Delete</span>
+              </v-tooltip>
             </span>
         </template>
     </v-data-table>
@@ -42,7 +46,7 @@
 </template>
 
 <script>
-  import {GET_TEST_RESULTS} from '../../store/mutation-types';
+  import {GET_TEST_RESULTS, REMOVE_TEST_RESULT} from '../../store/mutation-types';
   export default {
     data() {
       return {
@@ -91,7 +95,6 @@
     },
     computed:{
       testResults() {
-        console.log(this.$store.store.state.testResults)
         return this.$store.store.state.testResults;
       }
     },

@@ -33,9 +33,9 @@
       <v-toolbar-title>Health App</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height fill-width>
+      <v-container fluid align-content-center>
         <v-layout>
-          <router-view></router-view>
+            <router-view></router-view>
         </v-layout>
       </v-container>
     </v-content>

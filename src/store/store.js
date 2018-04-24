@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
     doctor:{},
     patients: [],
     testResults: [],
+    notes: []
   },
   mutations,
   getters,

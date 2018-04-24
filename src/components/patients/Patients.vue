@@ -29,6 +29,10 @@
                <v-icon dark color="primary" slot="activator" @click="">edit</v-icon>
                <span>Edit</span>
               </v-tooltip>
+              <v-tooltip bottom>
+               <v-icon dark color="primary" slot="activator" @click="">delete</v-icon>
+               <span>Delete</span>
+              </v-tooltip>
             </span>
         </template>
     </v-data-table>

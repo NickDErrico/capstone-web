@@ -1,8 +1,27 @@
-import {LOGIN_DOCTOR, REGISTER_DOCTOR, GET_PATIENTS, CHECK_DOCTOR, LOGOUT, GET_TEST_RESULTS} from "./mutation-types";
+import {
+  LOGIN_DOCTOR,
+  REGISTER_DOCTOR,
+  CHECK_DOCTOR,
+  LOGOUT,
+  GET_PATIENTS,
+  GET_TEST_RESULTS,
+  GET_NOTES,
+  REMOVE_PATIENT,
+  REMOVE_TEST_RESULT,
+  REMOVE_NOTE,
+  ADD_PATIENT,
+  ADD_TEST_RESULT,
+  ADD_NOTE,
+  UPDATE_PATIENT,
+  UPDATE_TEST_RESULT,
+  UPDATE_NOTE
+} from "./mutation-types";
 const url = "http://localhost:8000";
 import axios from "axios";
 export const actions = {
   // Context is store itself and payload is the data
+
+  // LOGIN/LOGUT :
   [LOGIN_DOCTOR](context, payload) {
     return new Promise((resolve, reject) => {
       axios.post(`${url}/login`, payload)
@@ -41,6 +60,15 @@ export const actions = {
     })
   },
 
+  [LOGOUT](context) {
+    return new Promise((resolve, reject)=>{
+      localStorage.removeItem("doctor");
+      context.commit(LOGOUT);
+      resolve();
+    })
+  },
+
+  // GET :
   [GET_PATIENTS](context) {
     return new Promise((resolve, reject) => {
       let token = localStorage.getItem("doctor");
@@ -73,11 +101,40 @@ export const actions = {
     })
   },
 
-  [LOGOUT](context) {
+  [GET_TEST_RESULTS](context) {
+    return new Promise((resolve, reject) => {
+      let token = localStorage.getItem("doctor");
+      if(!token){
+        reject();
+      }
+      axios.get(`${url}/notes?token=${token}`).then((note)=>{
+        context.commit(GET_NOTES, note.data);
+      })
+      .catch(() => {
+        reject();
+      })
+    })
+  },
+
+  // REMOVE :
+  [REMOVE_PATIENT](context) {
     return new Promise((resolve, reject)=>{
-      localStorage.removeItem("doctor");
-      context.commit(LOGOUT);
+      context.commit(REMOVE_PATIENT);
       resolve();
     })
-  }
+  },
+
+  [REMOVE_TEST_RESULT](context) {
+    return new Promise((resolve, reject)=>{
+      context.commit(REMOVE_TEST_RESULT);
+      resolve();
+    })
+  },
+
+  [REMOVE_NOTE](context) {
+    return new Promise((resolve, reject)=>{
+      context.commit(REMOVE_NOTE);
+      resolve();
+    })
+  },
 };
