@@ -5,18 +5,17 @@
       <v-spacer></v-spacer>
       <v-text-field dark append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
     </v-card-title>
-    <v-data-table must-sort :headers="headers" :items="testResults" :search="search">
-      <template slot="items" slot-scope="testResults" v-for="(item, index) in testResults">
-          <td class="text-xs-right"  :item-key="item.id">{{ item.id }}</td>
-          <td class="text-xs-right" >{{ item.last_name }}, {{ item.first_name}}</td>
-          <td class="text-xs-right" >{{ item.age }}</td>
-          <td class="text-xs-right" >{{ item.sex }}</td>
-          <td class="text-xs-right" >{{ item.height }} inches</td>
-          <td class="text-xs-right" >{{ item.weight }} lbs.</td>
-          <td class="text-xs-right" >{{ item.date.substring(0, 10) }}</td>
-          <td class="text-xs-right" >{{ item.name }}</td>
-          <td :class="item.results > item.low && item.results < item.high ? 'red': 'green' " class="text-xs-right">{{ item.results }}</td>
-            <span class="right">
+    <v-data-table v-if="testResults" :rows-per-page-items="[25,50]" must-sort :headers="headers"  :items="testResults" :search="search">
+      <template slot="items" slot-scope="testResults">
+          <td class="text-xs-left">{{ testResults.item.last_name }}, {{ testResults.item.first_name}}</td>
+          <td class="text-xs-left">{{ testResults.item.age }}</td>
+          <td class="text-xs-left">{{ testResults.item.sex }}</td>
+          <td class="text-xs-left">{{ testResults.item.height }} inches</td>
+          <td class="text-xs-left">{{ testResults.item.weight }} lbs.</td>
+          <td class="text-xs-left">{{ testResults.item.date.substring(0, 10) }}</td>
+          <td class="text-xs-left">{{ testResults.item.name }}</td>
+          <td :class="testResults.item.results > testResults.item.low && testResults.item.results < testResults.item.high ? 'red': 'green' " class="text-xs-right">{{ testResults.item.results }}</td>
+            <span class="icons">
               <v-tooltip bottom>
                <v-icon dark color="primary" slot="activator" @click="">local_hospital</v-icon>
                <span>Lab Results</span>
@@ -92,7 +91,8 @@
     },
     computed:{
       testResults() {
-        return this.$store.store.getters.testResults;
+        console.log(this.$store.store.state.testResults)
+        return this.$store.store.state.testResults;
       }
     },
     created() {
@@ -105,8 +105,10 @@
 
 <style lang="scss">
 
-  i{
+  i {
     cursor: pointer !important;
+    margin-top: 13px;
+    padding-right: 20px;
   }
 
   .text-xs-right {

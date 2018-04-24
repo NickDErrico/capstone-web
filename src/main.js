@@ -4,18 +4,17 @@ import App from './App.vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css'
 import { routes } from './routes';
-import 'vue-awesome/icons';
-import Icon from 'vue-awesome/components/Icon.vue';
+// import { Line } from 'vue-chartjs';
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
-Vue.component('icon', Icon);
+
 
 import * as store from "./store/store";
 
 const router = new VueRouter({
   mode: 'history',
-  routes
+  routes,
 })
 
 new Vue({
