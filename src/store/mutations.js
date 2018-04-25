@@ -24,15 +24,18 @@ export const mutations = {
     state.token = payload.token;
     state.doctor = payload.doctor;
   },
+
   [LOGIN_DOCTOR](state, payload) {
     localStorage.setItem("doctor", payload.token);
     state.token = payload.token;
     state.doctor = payload.doctor;
   },
+
   [CHECK_DOCTOR](state, payload) {
     state.token = localStorage.getItem("doctor");
     state.doctor = payload.doctor;
   },
+
   [LOGOUT](state) {
     state.loggedIn = false
     state.doctor = {};
@@ -43,9 +46,11 @@ export const mutations = {
   [GET_PATIENTS](state, payload) {
     state.patients = payload;
   },
+
   [GET_TEST_RESULTS](state, payload) {
     state.testResults = payload;
   },
+
   [GET_NOTES](state, payload) {
     state.notes = payload;
   },
@@ -56,18 +61,20 @@ export const mutations = {
       state.patient[req.params.id] = {};
     }
   },
+
   [REMOVE_TEST_RESULT](state) {
     if(state.testResults.id === req.params.id) {
       state.testResults[req.params.id] = {};
     }
   },
+
   [REMOVE_NOTE](state) {
     if(state.notes.id === req.params.id) {
       state.notes[req.params.id] = {};
     }
   },
 
-  
+
   // CREATE :
   [ADD_PATIENT](state, payload) {
 

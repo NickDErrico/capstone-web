@@ -16,10 +16,11 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "^1.2.0",
     "chart.js": "^2.7.2",
+    "chartist": "^0.11.0",
     "popper.js": "^1.12.9",
+    "v-chartist": "^0.1.6",
     "vue": "^2.5.3",
     "vue-awesome": "^3.0.0",
     "vue-chart.js": "^0.2.0",

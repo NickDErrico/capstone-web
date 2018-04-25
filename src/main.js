@@ -4,7 +4,6 @@ import App from './App.vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css'
 import { routes } from './routes';
-// import { Line } from 'vue-chartjs';
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);

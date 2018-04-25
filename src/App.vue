@@ -3,21 +3,21 @@
     <v-navigation-drawer v-if="doctor" clipped v-model="drawer" app dark class="blue darken-2">
       <v-list dense>
         <v-list-tile @click="$router.push('/patients')">
-            <v-icon center color="white">people</v-icon>
-            <v-list-tile-title left>Patients</v-list-tile-title>
+            <v-icon color="white">people</v-icon>
+            <v-list-tile-title>Patients</v-list-tile-title>
         </v-list-tile>
         <v-list-tile @click="$router.push('/labstable')">
-          <v-icon center color="white">local_hospital</v-icon>
+          <v-icon color="white">local_hospital</v-icon>
           <v-list-tile-title>Labs</v-list-tile-title>
         </v-list-tile>
         <v-list-tile @click="$router.push('/charts')">
-          <v-icon center color="white">show_chart</v-icon>
+          <v-icon color="white">show_chart</v-icon>
           <v-list-tile-title>Charts</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="$router.push('/appointments')">
+        <!-- <v-list-tile @click="$router.push('/appointments')">
           <v-icon color="white">perm_contact_calendar</v-icon>
           <v-list-tile-title>Appointments</v-list-tile-title>
-        </v-list-tile>
+        </v-list-tile> -->
         <v-list-tile @click="$router.push('/notes')">
           <v-icon color="white">assignment</v-icon>
           <v-list-tile-title>Notes</v-list-tile-title>

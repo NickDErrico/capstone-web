@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import {GET_TEST_RESULTS, REMOVE_TEST_RESULT} from '../../store/mutation-types';
+  import {GET_TEST_RESULTS} from '../../store/mutation-types';
   export default {
     data() {
       return {
@@ -99,7 +99,9 @@
       }
     },
     created() {
+      console.log('labstable created')
       this.$store.store.dispatch(GET_TEST_RESULTS).catch(() => {
+        console.log('catch')
         this.$router.push("/labstable");
       })
     },

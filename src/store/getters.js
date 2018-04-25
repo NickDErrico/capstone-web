@@ -9,6 +9,10 @@ export const getters = {
 
   testResults: (state) => {
     return state.testResults.length > 0 ? state.testResults : false;
+  },
+
+  notes: (state) => {
+    return state.notes.length > 0 ? state.notes : false;
   }
 
 };
