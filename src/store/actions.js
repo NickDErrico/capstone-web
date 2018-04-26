@@ -4,12 +4,10 @@ import {
   CHECK_DOCTOR,
   LOGOUT,
   GET_PATIENTS,
-  GET_SINGLE_PATIENT,
   ADD_PATIENT,
   UPDATE_PATIENT,
   REMOVE_PATIENT,
   GET_TEST_RESULTS,
-  GET_SINGLE_PATIENT_TEST_RESULTS,
   ADD_TEST_RESULT,
   UPDATE_TEST_RESULT,
   REMOVE_TEST_RESULT,
@@ -64,7 +62,7 @@ export const actions = {
   },
 
   [LOGOUT](context) {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
       localStorage.removeItem("doctor");
       context.commit(LOGOUT);
       resolve();
@@ -82,7 +80,7 @@ export const actions = {
       if(!token){
         reject();
       }
-      axios.get(`${url}/patients?token=${token}`).then((result)=>{
+      axios.get(`${url}/patients?token=${token}`).then((result) => {
         context.commit(GET_PATIENTS, result.data);
       })
       .catch((err) => {
@@ -92,29 +90,36 @@ export const actions = {
     })
   },
 
-  [GET_SINGLE_PATIENT](context) {
+  [ADD_PATIENT](context, payload) {
     return new Promise((resolve, reject) => {
       let token = localStorage.getItem("doctor");
       if(!token){
         reject();
       }
-      axios.get(`${url}/patients/:id?token=${token}`).then((result)=>{
-        context.commit(GET_PATIENTS, result.data);
-      })
-      .catch((err) => {
-        console.log(err)
+      axios.post(`${url}/patients`, {'payload': payload, 'token': token}).then((result) => {
+        console.log(payload)
+        context.commit(ADD_PATIENT, result.data);
+        resolve();
+      }).catch((err) => {
+        console.log(err);
         reject();
       })
     })
   },
 
-  [REMOVE_PATIENT](context) {
-    return new Promise((resolve, reject)=>{
-      context.commit(REMOVE_PATIENT);
-      resolve();
-    }).catch((err) => {
-      console.log(err);
-      reject();
+  [REMOVE_PATIENT](context, payload) {
+    return new Promise((resolve, reject) => {
+      let token = localStorage.getItem("doctor");
+      if(!token){
+        reject();
+      }
+      axios.post(`${url}/patients`, payload).then((result) => {
+        context.commit(REMOVE_PATIENT, result.data);
+        resolve();
+      }).catch((err) => {
+        console.log(err);
+        reject();
+      })
     })
   },
 
@@ -136,16 +141,17 @@ export const actions = {
     })
   },
 
-  [GET_SINGLE_PATIENT_TEST_RESULTS](context) {
+  [ADD_TEST_RESULT](context, payload) {
     return new Promise((resolve, reject) => {
       let token = localStorage.getItem("doctor");
       if(!token){
         reject();
       }
-      axios.get(`${url}/results/:id?token=${token}`).then((result)=>{
-        context.commit(GET_TEST_RESULTS, result.data);
-      })
-      .catch((err) => {
+      axios.post(`${url}/patients`, {'payload': payload, 'token': token}).then((result) => {
+        console.log(payload)
+        context.commit(ADD_TEST_RESULT, result.data);
+        resolve();
+      }).catch((err) => {
         console.log(err);
         reject();
       })
@@ -180,21 +186,20 @@ export const actions = {
     })
   },
 
-  [ADD_NOTE](context, payload){
-    return new Promise((resolve, reject)=>{
-      const token = localStorage.getItem("doctor");
-      if(token){
-        axios.post("notes", {token:token, note: payload}, {emulateJSON:true})
-          .then((res)=>{
-            context.dispatch(GET_TEAMS);
-            resolve()
-          })
-          .catch((err)=>{
-            reject(err);
-          })
-      }else{
+  [ADD_NOTE](context, payload) {
+    return new Promise((resolve, reject) => {
+      let token = localStorage.getItem("doctor");
+      if(!token){
         reject();
       }
+      axios.post(`${url}/notes`, {'payload': payload, 'token': token}).then((result) => {
+        console.log(payload)
+        context.commit(ADD_NOTE, result.data);
+        resolve();
+      }).catch((err) => {
+        console.log(err);
+        reject();
+      })
     })
   },
 

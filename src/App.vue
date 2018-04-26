@@ -85,15 +85,11 @@
 }
 
 .toolbar__title {
-  margin-left: 8%;
+  // margin-left: 8%;
 }
 
 .navigation-drawer__border {
   width:0 !important;
-}
-
-.list--dense .list__tile {
-    font-size: 20px;
 }
 
 .navigation-drawer .list__tile__title {
@@ -104,9 +100,11 @@
 }
 
 i {
+  padding: 0 !important;
   margin-left: .5em;
+  margin-top: 0 !important;
   width: auto;
-  height: 1em;
+  height: 1.5em !important;
   max-width: 1.5em;
   max-height: 1.5em;
 }

@@ -9,16 +9,24 @@ export default {
           labels: this.testRes.dates,
           datasets: [
             {
-              label: this.testRes.name,
-              backgroundColor: 'rgba(0, 0, 0, .7)',
+              backgroundColor: 'rgba(255, 255, 255, .7)',
+              fontColor: 'black',
               pointBackgroundColor: 'black',
               borderWidth: 1,
-              pointBorderColor: '#249EBF',
+              pointBorderColor: 'black',
               data: this.testRes.results
             }
           ]
         },
         options: {
+          title: {
+            text: this.testRes.name,
+            display: true,
+            lineHeight: 1,
+            fontSize: 24,
+            fontStyle: 'bold',
+            fontColor: 'black'
+          },
           scales: {
             yAxes: [{
               ticks: {
@@ -26,6 +34,7 @@ export default {
                 beginAtZero: true
               },
               gridLines: {
+                color: 'rgba(0, 0, 0, .2)',
                 fontColor: 'black',
                 display: true
               }
@@ -35,14 +44,21 @@ export default {
                 fontColor: 'black'
               },
               gridLines: {
-              fontColor: 'black',
+                color: 'rgba(0, 0, 0, .2)',
+                fontColor: 'black',
                 display: true
               }
             }]
           },
           legend: {
-            fontColor: 'black',
-            display: true
+            display: false
+          },
+          layout: {
+            padding: {
+              bottom: 10,
+              left: 10,
+              right: 10
+            }
           },
           responsive: true,
           maintainAspectRatio: false
@@ -50,12 +66,6 @@ export default {
       }
     },
     mounted () {
-      this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450);
-      this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
-      this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
-      this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
       this.renderChart(this.datacollection, this.options);
     },
   }
-
-              // v-bind:style="{ 'background': `linear-gradient(180deg, rgba(245,3,3,1) 0%, rgba(245,3,3,1) 33%, rgba(67,253,29,1) 33%, rgba(67,253,29,1) 66%, rgba(245,3,3,1) 66%, rgba(245,3,3,1) 100%)` }"

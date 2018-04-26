@@ -4,19 +4,17 @@ import {
   CHECK_DOCTOR,
   LOGOUT,
   GET_PATIENTS,
-  GET_SINGLE_PATIENT,
-  GET_TEST_RESULTS,
-  GET_SINGLE_PATIENT_TEST_RESULTS,
-  GET_NOTES,
-  REMOVE_PATIENT,
-  REMOVE_TEST_RESULT,
-  REMOVE_NOTE,
   ADD_PATIENT,
-  ADD_TEST_RESULT,
-  ADD_NOTE,
   UPDATE_PATIENT,
+  REMOVE_PATIENT,
+  GET_TEST_RESULTS,
+  ADD_TEST_RESULT,
   UPDATE_TEST_RESULT,
-  UPDATE_NOTE
+  REMOVE_TEST_RESULT,
+  GET_NOTES,
+  ADD_NOTE,
+  UPDATE_NOTE,
+  REMOVE_NOTE
 } from "./mutation-types";
 export const mutations = {
 
@@ -44,32 +42,41 @@ export const mutations = {
     localStorage.removeItem('doctor')
   },
 
-  // GET :
+  // PATIENTS :
   [GET_PATIENTS](state, payload) {
     state.patients = payload;
   },
 
-  [GET_SINGLE_PATIENT](state, payload) {
-    state.patients = payload;
+  [ADD_PATIENT](state, payload) {
+    state.token = localStorage.getItem("doctor");
+    state.patients.push(payload);
   },
 
-  [GET_TEST_RESULTS](state, payload) {
-    state.testResults = payload;
+  [UPDATE_PATIENT](state, payload) {
+
   },
 
-  [GET_TEST_RESULTS](state, payload) {
-    state.testResults = payload;
-  },
-
-  [GET_NOTES](state, payload) {
-    state.notes = payload;
-  },
-
-  // REMOVE :
   [REMOVE_PATIENT](state) {
-    if(state.patient.id === req.params.id) {
-      state.patient[req.params.id] = {};
-    }
+    state.patient.map(item => {
+      if(state.patient.id === req.params.id) {
+        state.patient.splice(req.params.id, 1);
+      }
+    })
+  },
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // TEST RESULTS :
+  [GET_TEST_RESULTS](state, payload) {
+    state.testResults = payload;
+  },
+
+  [ADD_TEST_RESULT](state, payload) {
+    state.token = localStorage.getItem("doctor");
+    state.testResults.push(payload);
+  },
+
+  [UPDATE_TEST_RESULT](state, payload) {
+
   },
 
   [REMOVE_TEST_RESULT](state) {
@@ -78,37 +85,24 @@ export const mutations = {
     }
   },
 
-  [REMOVE_NOTE](state) {
-    if(state.notes.id === req.params.id) {
-      state.notes[req.params.id] = {};
-    }
-  },
 
-
-  // CREATE :
-  [ADD_PATIENT](state, payload) {
-
-  },
-
-  [ADD_TEST_RESULT](state, payload) {
-
+  // NOTES :
+  [GET_NOTES](state, payload) {
+    state.notes = payload;
   },
 
   [ADD_NOTE](state, payload) {
-
-  },
-
-
-  //UPDATE :
-  [UPDATE_PATIENT](state, payload) {
-
-  },
-
-  [UPDATE_TEST_RESULT](state, payload) {
-
+    state.token = localStorage.getItem("doctor");
+    state.notes.push(payload);
   },
 
   [UPDATE_NOTE](state, payload) {
 
+  },
+
+  [REMOVE_NOTE](state) {
+    if(state.notes.id === req.params.id) {
+      state.notes[req.params.id] = {};
+    }
   },
 };

@@ -2,11 +2,12 @@
   <section class="container">
     <div class="columns">
       <div class="column">
-        <h3>Test Results</h3>
+        <h3 class="display-2">Test Results</h3>
           <line-chart
             class="chart"
-             v-bind:style="{ 'background': `linear-gradient(0deg, rgba(245,3,3,.9) 5%, rgba(245,3,3,.9) 33%, rgba(67,253,29,.9) 33%, rgba(67,253,29,.9) 66%, rgba(245,3,3,.9) 66%, rgba(245,3,3,.9) 100%)` }"
+            v-bind:style="{ 'background': `linear-gradient(0deg, rgb(232, 125, 125, .8) ${testRes.low}%, rgb(232, 125, 125, .8) ${testRes.low}%, rgb(108, 209, 123, .8) ${testRes.low}%, rgb(108, 209, 123, .8) ${testRes.high}%, rgb(232, 125, 125, .8) ${testRes.high}%, rgb(232, 125, 125, .8) ${testRes.high}%)` }"
             v-for="testRes in testInfo"
+            :key="testRes.id"
             :testRes="testRes">
           </line-chart>
       </div>
@@ -56,7 +57,6 @@
 </script>
 
 <style lang="scss" scoped>
-// $gradient: linear-gradient(180deg, rgba(242,15,15,1) 0%, rgba(67,253,29,1) `${obj.low}%`, rgba(67,253,29,1) `${obj.high}%`, rgba(245,3,3,1) 100%);
 
   .chart {
     background: white;
@@ -74,7 +74,4 @@
     margin: 0 10px;
   }
 
-  a {
-    color: #42b983;
-  }
 </style>

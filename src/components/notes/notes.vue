@@ -1,31 +1,8 @@
 <template>
   <div id="notes">
-    <v-container fluid>
-       <v-layout row wrap>
-         <v-flex xs12 sm7>
-           <v-subheader class="blue darken-3 white--text">Patient</v-subheader>
-         </v-flex>
-         <v-flex xs12 sm7>
-           <v-select
-             v-if="patients"
-             :items="patients"
-             :filter="customFilter"
-             v-model="a1"
-             item-text="last_name"
-             label="Select"
-             autocomplete
-             clearable
-             :key="patients.id"
-           ></v-select>
-         </v-flex>
-       </v-layout>
-     </v-container>
+    <EditNoteForm />
     <v-container grid-list-md>
       <v-layout row wrap>
-        <v-flex xs12>
-          <v-text-field box multi-line label="Notes"></v-text-field>
-          <v-btn left dark color="blue darken-3">Submit</v-btn>
-        </v-flex>
       </v-layout>
     </v-container>
     <v-layout row>
@@ -62,16 +39,15 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <!-- <EditModal></EditModal> -->
   </div>
 </template>
 
 <script>
-import EditModal from '../../components/modals/EditNotesModal.vue';
-import { GET_NOTES, GET_PATIENTS, ADD_NOTE } from '../../store/mutation-types';
+import { GET_NOTES, GET_PATIENTS} from '../../store/mutation-types';
+import EditNoteForm from '../modals/EditNoteForm.vue';
 export default {
   components: {
-    EditModal
+    EditNoteForm
   },
   data () {
     return {
@@ -116,6 +92,10 @@ export default {
 
   .divider {
     max-height: 1px !important;
+  }
+
+  .input-group--text-field-box {
+    padding-top: 0 !important;
   }
 
 </style>
