@@ -4,7 +4,9 @@ import {
   CHECK_DOCTOR,
   LOGOUT,
   GET_PATIENTS,
+  GET_SINGLE_PATIENT,
   GET_TEST_RESULTS,
+  GET_SINGLE_PATIENT_TEST_RESULTS,
   GET_NOTES,
   REMOVE_PATIENT,
   REMOVE_TEST_RESULT,
@@ -45,6 +47,14 @@ export const mutations = {
   // GET :
   [GET_PATIENTS](state, payload) {
     state.patients = payload;
+  },
+
+  [GET_SINGLE_PATIENT](state, payload) {
+    state.patients = payload;
+  },
+
+  [GET_TEST_RESULTS](state, payload) {
+    state.testResults = payload;
   },
 
   [GET_TEST_RESULTS](state, payload) {

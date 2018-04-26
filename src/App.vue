@@ -30,7 +30,7 @@
     </v-navigation-drawer>
     <v-toolbar clipped-left color="blue darken-3" dark fixed app>
       <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"><icon name="bars"></icon></v-toolbar-side-icon> -->
-      <v-toolbar-title>Health App</v-toolbar-title>
+      <v-toolbar-title>Healthy Me</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid align-content-center>

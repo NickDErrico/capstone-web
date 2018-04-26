@@ -14,5 +14,5 @@ export const getters = {
   notes: (state) => {
     return state.notes.length > 0 ? state.notes : false;
   }
-
+  
 };

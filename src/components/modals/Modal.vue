@@ -41,7 +41,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="dialog = !dialog">Cancel</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="submit">Submit</v-btn>
+          <v-btn color="blue darken-1" @click.native="submit">Submit</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -52,7 +52,7 @@
 
 <script>
   import axios from "axios";
-  import {LOGIN_DOCTOR, REGISTER_DOCTOR} from "../store/mutation-types";
+  import {LOGIN_DOCTOR, REGISTER_DOCTOR} from "../../store/mutation-types";
   export default {
     data: () => ({
       dialog: false,
@@ -80,19 +80,18 @@
     methods: {
       login:function() {
         this.$store.store.dispatch(LOGIN_DOCTOR, this.loginDoctor).then(()=>{
-          console.log("done!");
           this.dialog = false;
           this.$router.push("/patients");
         });
       },
       register: function() {
         this.$store.store.dispatch(REGISTER_DOCTOR, this.registerDoctor).then(()=>{
-          console.log("done!");
           this.dialog = false;
           this.$router.push("/patients");
         });
       },
-      submit: function() {
+      submit: function(e) {
+        e.preventDefault()
         if(!this.hasAccount) {
           if(this.registerDoctor.password === this.registerDoctor.confirmPassword) {
             this.register(this.registerDoctor)

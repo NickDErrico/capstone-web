@@ -17,15 +17,15 @@
           <td :class="testResults.item.results > testResults.item.low && testResults.item.results < testResults.item.high ? 'red': 'green' " class="text-xs-right">{{ testResults.item.results }}</td>
             <span class="icons">
               <v-tooltip bottom>
-               <v-icon dark color="primary" slot="activator" @click="">local_hospital</v-icon>
+               <v-icon dark color="primary" slot="activator" @click="$router.push(`/labstable/${testResults.item.patient_id}`)">local_hospital</v-icon>
                <span>Lab Results</span>
               </v-tooltip>
               <v-tooltip bottom>
-               <v-icon dark color="primary" slot="activator" @click="">show_chart</v-icon>
+               <v-icon dark color="primary" slot="activator" @click="$router.push(`/charts/${testResults.item.patient_id}`)">show_chart</v-icon>
                <span>Charts</span>
               </v-tooltip>
               <v-tooltip bottom>
-               <v-icon dark color="primary" slot="activator" @click="">assignment</v-icon>
+               <v-icon dark color="primary" slot="activator" @click="$router.push(`/notes`)">assignment</v-icon>
                <span>Notes</span>
               </v-tooltip>
               <v-tooltip bottom>
@@ -95,15 +95,16 @@
     },
     computed:{
       testResults() {
-        return this.$store.store.state.testResults;
+        if(this.$route.params.id) {
+          let routeId = Number(this.$route.params.id);
+          return this.$store.store.state.testResults.filter(item=>item.patient_id===routeId);
+        }else {
+          return this.$store.store.state.testResults
+        }
       }
     },
     created() {
-      console.log('labstable created')
-      this.$store.store.dispatch(GET_TEST_RESULTS).catch(() => {
-        console.log('catch')
-        this.$router.push("/labstable");
-      })
+      this.$store.store.dispatch(GET_TEST_RESULTS);
     },
   }
 </script>

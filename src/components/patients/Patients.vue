@@ -14,15 +14,15 @@
           <td class="text-xs-left">{{ patients.item.weight }} lbs.</td>
             <span class="icons">
               <v-tooltip bottom>
-               <v-icon dark color="primary" slot="activator" @click="">local_hospital</v-icon>
+               <v-icon dark color="primary" slot="activator" @click="$router.push(`/labstable/${patients.item.id}`)">local_hospital</v-icon>
                <span>Lab Results</span>
               </v-tooltip>
               <v-tooltip bottom>
-               <v-icon dark color="primary" slot="activator" @click="">show_chart</v-icon>
+               <v-icon dark color="primary" slot="activator" @click="$router.push(`/charts/${patients.item.id}`)">show_chart</v-icon>
                <span>Charts</span>
               </v-tooltip>
               <v-tooltip bottom>
-               <v-icon dark color="primary" slot="activator" @click="">assignment</v-icon>
+               <v-icon dark color="primary" slot="activator" @click="$router.push(`/notes`)">assignment</v-icon>
                <span>Notes</span>
               </v-tooltip>
               <v-tooltip bottom>
@@ -77,13 +77,11 @@
     },
     computed:{
       patients() {
-        console.log(this.$store.store.state.patients)
         return this.$store.store.state.patients;
       }
     },
     created() {
       this.$store.store.dispatch(GET_PATIENTS).catch(() => {
-        this.$router.push("/patients");
       })
     },
   }

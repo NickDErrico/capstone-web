@@ -47,7 +47,7 @@
                 </v-list-tile-content>
                   <span>
                     <v-tooltip bottom>
-                     <v-icon dark color="primary" slot="activator" @click="">edit</v-icon>
+                     <v-icon dark color="primary" slot="activator" @click="dialog = !dialog">edit</v-icon>
                      <span>Edit</span>
                     </v-tooltip>
                     <v-tooltip bottom>
@@ -62,18 +62,23 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <!-- <EditModal></EditModal> -->
   </div>
 </template>
 
 <script>
+import EditModal from '../../components/modals/EditNotesModal.vue';
 import { GET_NOTES, GET_PATIENTS, ADD_NOTE } from '../../store/mutation-types';
 export default {
+  components: {
+    EditModal
+  },
   data () {
     return {
+      props: ['patient'],
       a1: null,
       memo: "Memo to self :",
-      patientName: "",
-      localStatePatients: []
+      dailog: false
     }
   },
   computed:{
@@ -85,16 +90,7 @@ export default {
     },
   },
   created() {
-    this.$store.store.dispatch(GET_NOTES).catch(() => {
-      this.$router.push("/notes");
-    })
-  },
-  getPatients() {
-    this.$store.store.dispatch(GET_PATIENTS).catch(() => {
-      patients.push(this.$store.store.patients);
-      console.log('local patients', localStatePatients)
-      this.$router.push("/notes");
-    })
+    this.$store.store.dispatch(GET_NOTES);
   },
   methods: {
     customFilter(patients, queryText, itemText) {
@@ -103,9 +99,6 @@ export default {
       const query = hasValue(queryText);
       return text.toString().toLowerCase().indexOf(query.toString().toLowerCase()) > -1;
     },
-    getPatientName() {
-
-    }
   }
 }
 

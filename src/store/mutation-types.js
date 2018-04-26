@@ -1,9 +1,11 @@
 export const REGISTER_DOCTOR = 'registerdoctor';
 export const LOGIN_DOCTOR = 'logindoctor';
 export const GET_PATIENTS = 'getpatients';
+export const GET_SINGLE_PATIENT = 'getsinglepatient';
 export const CHECK_DOCTOR = 'checkdoctor';
 export const LOGOUT = 'logout';
 export const GET_TEST_RESULTS = 'gettestresults';
+export const GET_SINGLE_PATIENT_TEST_RESULTS = 'getsinglepatienttestresults';
 export const GET_NOTES = 'getnotes';
 export const REMOVE_PATIENT = 'removepatients';
 export const REMOVE_TEST_RESULT = 'removetestresults';

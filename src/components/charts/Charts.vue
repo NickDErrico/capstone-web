@@ -1,80 +1,80 @@
 <template>
-<div class="v-chartist-container"></div>
+  <section class="container">
+    <div class="columns">
+      <div class="column">
+        <h3>Test Results</h3>
+          <line-chart
+            class="chart"
+             v-bind:style="{ 'background': `linear-gradient(0deg, rgba(245,3,3,.9) 5%, rgba(245,3,3,.9) 33%, rgba(67,253,29,.9) 33%, rgba(67,253,29,.9) 66%, rgba(245,3,3,.9) 66%, rgba(245,3,3,.9) 100%)` }"
+            v-for="testRes in testInfo"
+            :testRes="testRes">
+          </line-chart>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import {
-  Line
-} from 'chartist';
+  import LineChart from './LineChart.js'
 
-export default {
-  data() {
-    data: {
-      type: Object,
-      required: true
+  export default {
+    components: {
+      LineChart,
     },
-    options: {
-      type: Object
+    data(){
+      return {
+        testInfo:[]
+      }
     },
-    listener: {
-      type: Object
-    },
-    responsiveOptions: {
-      type: Array
-    }
-  },
-  data() {
-    return {
-      chartist: undefined
-    }
-  },
-  methods: {
-    updateEventListener(listener, type = 'on') {
-      listener = listener || {};
-      for (let event in listener) {
-        if (listener.hasOwnProperty(event)) {
-          this.chartist[type](event, listener[event]);
+
+    created(){
+      let results = this.$store.store.state.testResults;
+      let obj = {};
+
+      results.map(item => {
+        if(!obj[item.name]) {
+          obj[item.name] = {
+            name: item.name,
+            results:[item.results],
+            low:item.low,
+            high:item.high,
+            dates:[item.date.slice(0,10)]
+          }
+        }else{
+          obj[item.name].results.push(item.results);
+          obj[item.name].dates.push(item.date.slice(0,10));
         }
-      }
-    },
-    renderChart() {
-      let data = this.data;
-      let options = this.options ? this.options : {};
-      let responsiveOptions = this.responsiveOptions ? this.responsiveOptions : [];
-      if (this.chartist) {
-        this.chartist.update(data, options, responsiveOptions);
-      } else {
-        this.chartist = new Chartist[this.type](this.$el, data, options, responsiveOptions);
-        this.updateEventListener(this.listener, 'on');
+      })
+
+      for(let key in obj){
+        this.testInfo.push(obj[key]);
       }
     }
-  },
-  watch: {
-    data: {
-      handler: 'renderChart',
-      deep: true
-    },
-    options: {
-      handler: 'renderChart',
-      deep: true
-    },
-    responsiveOptions: {
-      handler: 'renderChart',
-      deep: true
-    },
-    listener(val, oldVal) {
-      this.updateEventListener(oldVal, 'off');
-      this.updateEventListener(val, 'on');
-    }
-  },
-  mounted() {
-    this.renderChart();
-  },
-  destroyed() {
-    if (this.chartist) {
-      this.chartist.detach();
-    }
+
+
   }
-}
-};
 </script>
+
+<style lang="scss" scoped>
+// $gradient: linear-gradient(180deg, rgba(242,15,15,1) 0%, rgba(67,253,29,1) `${obj.low}%`, rgba(67,253,29,1) `${obj.high}%`, rgba(245,3,3,1) 100%);
+
+  .chart {
+    background: white;
+    box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
+    margin:  25px 0;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  a {
+    color: #42b983;
+  }
+</style>
