@@ -11,7 +11,7 @@
               <v-text-field dark append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
             </v-card-title>
             <v-data-table v-if="patients" :rows-per-page-items="[5, 10, 25, 50]" must-sort :headers="headers" :items="patients" :search="search">
-              <template slot="items" :patientIds="patients.patient_id" slot-scope="patients">
+              <template slot="items" slot-scope="patients">
                   <td class="text-xs-left">{{ patients.item.last_name }}, {{ patients.item.first_name}}</td>
                   <td class="text-xs-left">{{ patients.item.age }}</td>
                   <td class="text-xs-left">{{ patients.item.sex }}</td>
@@ -95,8 +95,7 @@
       }
     },
     created() {
-      this.$store.store.dispatch(GET_PATIENTS).catch(() => {
-      })
+      this.$store.store.dispatch(GET_PATIENTS);
     },
     methods: {
       removePatient() {

@@ -28,7 +28,7 @@
       }
     },
 
-    created(){
+    created( ){
       let results = this.$store.store.state.testResults;
       let obj = {};
 

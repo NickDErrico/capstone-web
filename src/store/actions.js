@@ -213,7 +213,7 @@ export const actions = {
       if(!token){
         reject();
       }
-      axios.post(`${url}/notes`, {'payload': payload, 'token': token}).then((result) => {
+      axios.delete(`${url}/notes/${payload[0].id}?token=${token}`, {'payload': payload, 'token': token}).then((result) => {
         context.commit(REMOVE_NOTE, result.data);
         resolve();
       }).catch((err) => {

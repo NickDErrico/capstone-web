@@ -28,7 +28,7 @@
                      <span>Edit</span>
                     </v-tooltip>
                     <v-tooltip bottom>
-                     <v-icon dark color="primary" slot="activator" @click="removeNote">delete</v-icon>
+                     <v-icon dark color="primary" slot="activator" @click="removeNote(item['id'])">delete</v-icon>
                      <span>Delete</span>
                     </v-tooltip>
                   </span>
@@ -72,8 +72,11 @@ export default {
       const query = hasValue(queryText);
       return text.toString().toLowerCase().indexOf(query.toString().toLowerCase()) > -1;
     },
-    removeNote() {
-
+    removeNote(id) {
+      if(id) {
+      let currNote = this.$store.store.state.notes.filter(item => item.id === id)
+        this.$store.store.dispatch(REMOVE_NOTE, currNote)
+      }
     },
     updateNote() {
 

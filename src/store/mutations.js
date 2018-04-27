@@ -97,9 +97,8 @@ export const mutations = {
 
   },
 
-  [REMOVE_NOTE](state) {
-    if(state.notes.id === req.params.id) {
-      state.notes[req.params.id] = {};
-    }
+  [REMOVE_NOTE](state, payload) {
+    state.token = localStorage.getItem("doctor");
+    state.notes.splice([payload[0].id], 1)
   },
 };
