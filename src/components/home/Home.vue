@@ -47,7 +47,7 @@ export default {
     display: block;
     position: relative;
     width: 100vw;
-    height: 89.5vh;
+    height: 90vh;
   }
 
   #banner::after {
