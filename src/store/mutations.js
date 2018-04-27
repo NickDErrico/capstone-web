@@ -57,11 +57,8 @@ export const mutations = {
   },
 
   [REMOVE_PATIENT](state) {
-    state.patient.map(item => {
-      if(state.patient.id === req.params.id) {
-        state.patient.splice(req.params.id, 1);
-      }
-    })
+    state.token = localStorage.getItem("doctor");
+    state.patients.splice(payload, 1)
   },
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

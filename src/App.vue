@@ -10,10 +10,10 @@
           <v-icon color="white">local_hospital</v-icon>
           <v-list-tile-title>Labs</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="$router.push('/charts')">
+        <!-- <v-list-tile @click="$router.push('/charts')">
           <v-icon color="white">show_chart</v-icon>
           <v-list-tile-title>Charts</v-list-tile-title>
-        </v-list-tile>
+        </v-list-tile> -->
         <!-- <v-list-tile @click="$router.push('/appointments')">
           <v-icon color="white">perm_contact_calendar</v-icon>
           <v-list-tile-title>Appointments</v-list-tile-title>
@@ -32,15 +32,15 @@
       <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"><icon name="bars"></icon></v-toolbar-side-icon> -->
       <v-toolbar-title>Healthy Me</v-toolbar-title>
     </v-toolbar>
-    <v-content>
-      <v-container fluid align-content-center>
-        <v-layout>
+    <v-content fill-width class="router-view-content">
+      <v-container fill-width class="router-view-container">
+        <v-layout align-center justify-center>
             <router-view></router-view>
         </v-layout>
-      </v-container>
+      </v-container fluid>
     </v-content>
-    <v-footer color="white" app>
-      <v-spacer></v-spacer>
+    <v-footer color="grey" app>
+      <!-- <v-spacer></v-spacer> -->
       <span class="black--text">&copy; Nick D'Errico 2018</span>
     </v-footer>
   </v-app>
@@ -82,10 +82,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-.toolbar__title {
-  // margin-left: 8%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .navigation-drawer__border {
@@ -99,6 +98,10 @@
     text-align: center;
 }
 
+.toolbar__title {
+  margin-left: 2vw;
+}
+
 i {
   padding: 0 !important;
   margin-left: .5em;
@@ -108,4 +111,15 @@ i {
   max-width: 1.5em;
   max-height: 1.5em;
 }
+
+span {
+  margin-left: 2vw;
+}
+
+.router-view-container {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 2400px !important;
+}
+
 </style>

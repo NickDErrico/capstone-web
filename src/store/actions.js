@@ -97,7 +97,6 @@ export const actions = {
         reject();
       }
       axios.post(`${url}/patients`, {'payload': payload, 'token': token}).then((result) => {
-        console.log(payload)
         context.commit(ADD_PATIENT, result.data);
         resolve();
       }).catch((err) => {
@@ -113,7 +112,7 @@ export const actions = {
       if(!token){
         reject();
       }
-      axios.post(`${url}/patients`, payload).then((result) => {
+      axios.post(`${url}/patients`, {'payload': payload, 'token': token}).then((result) => {
         context.commit(REMOVE_PATIENT, result.data);
         resolve();
       }).catch((err) => {
@@ -144,10 +143,10 @@ export const actions = {
   [ADD_TEST_RESULT](context, payload) {
     return new Promise((resolve, reject) => {
       let token = localStorage.getItem("doctor");
-      if(!token){
+      if(!token) {
         reject();
       }
-      axios.post(`${url}/patients`, {'payload': payload, 'token': token}).then((result) => {
+      axios.post(`${url}/results`, {'payload': payload, 'token': token}).then((result) => {
         console.log(payload)
         context.commit(ADD_TEST_RESULT, result.data);
         resolve();
@@ -159,12 +158,18 @@ export const actions = {
   },
 
   [REMOVE_TEST_RESULT](context) {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
+      let token = localStorage.getItem("doctor");
+      if(!token) {
+        reject();
+      }
+      axios.post(`${url}/results`, {'payload': payload, 'token': token}).then((result) => {
       context.commit(REMOVE_TEST_RESULT);
       resolve();
-    }).catch((err) => {
-      console.log(err);
-      reject();
+      }).catch((err) => {
+        console.log(err);
+        reject();
+      })
     })
   },
 
@@ -193,7 +198,6 @@ export const actions = {
         reject();
       }
       axios.post(`${url}/notes`, {'payload': payload, 'token': token}).then((result) => {
-        console.log(payload)
         context.commit(ADD_NOTE, result.data);
         resolve();
       }).catch((err) => {
@@ -203,13 +207,19 @@ export const actions = {
     })
   },
 
-  [REMOVE_NOTE](context) {
-    return new Promise((resolve, reject)=>{
-      context.commit(REMOVE_NOTE);
-      resolve();
-    }).catch((err) => {
-      console.log(err);
-      reject();
+  [REMOVE_NOTE](context, payload) {
+    return new Promise((resolve, reject) => {
+      let token = localStorage.getItem("doctor");
+      if(!token){
+        reject();
+      }
+      axios.post(`${url}/notes`, {'payload': payload, 'token': token}).then((result) => {
+        context.commit(REMOVE_NOTE, result.data);
+        resolve();
+      }).catch((err) => {
+        console.log(err);
+        reject();
+      })
     })
-  }
+  },
 };

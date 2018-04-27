@@ -121,5 +121,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+  a {
+    color: black;
+  }
 </style>

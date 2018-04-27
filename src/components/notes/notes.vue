@@ -24,11 +24,11 @@
                 </v-list-tile-content>
                   <span>
                     <v-tooltip bottom>
-                     <v-icon dark color="primary" slot="activator" @click="dialog = !dialog">edit</v-icon>
+                     <v-icon dark color="primary" slot="activator" @click="updateNote">edit</v-icon>
                      <span>Edit</span>
                     </v-tooltip>
                     <v-tooltip bottom>
-                     <v-icon dark color="primary" slot="activator" @click="">delete</v-icon>
+                     <v-icon dark color="primary" slot="activator" @click="removeNote">delete</v-icon>
                      <span>Delete</span>
                     </v-tooltip>
                   </span>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { GET_NOTES, GET_PATIENTS} from '../../store/mutation-types';
+import {GET_NOTES, REMOVE_NOTE, UPDATE_NOTE} from '../../store/mutation-types';
 import EditNoteForm from '../modals/EditNoteForm.vue';
 export default {
   components: {
@@ -60,10 +60,7 @@ export default {
   computed:{
     notes() {
       return this.$store.store.getters.notes;
-    },
-    patients() {
-      return this.$store.store.getters.patients;
-    },
+    }
   },
   created() {
     this.$store.store.dispatch(GET_NOTES);
@@ -75,6 +72,12 @@ export default {
       const query = hasValue(queryText);
       return text.toString().toLowerCase().indexOf(query.toString().toLowerCase()) > -1;
     },
+    removeNote() {
+
+    },
+    updateNote() {
+
+    }
   }
 }
 
@@ -82,8 +85,9 @@ export default {
 
 <style lang="scss" scoped>
   #notes {
+    margin-top: 5vh;
     height: 100vh;
-    width: 100vw;
+    width: 70vw;
   }
 
   .list {
@@ -96,6 +100,16 @@ export default {
 
   .input-group--text-field-box {
     padding-top: 0 !important;
+  }
+
+  i{
+    cursor: pointer !important;
+    margin-top: 13px;
+    padding-right: 20px;
+  }
+
+  .text-xs-right {
+    cursor: default !important;
   }
 
 </style>

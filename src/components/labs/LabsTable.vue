@@ -3,7 +3,7 @@
     <EditResultForm />
     <v-card  class="elevation-7">
       <v-card-title class="blue darken-3 white--text">
-        <b>Lab Results</b>
+        <h1 class="headline">Lab Results</h1>
         <v-spacer></v-spacer>
         <v-text-field dark append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
       </v-card-title>
@@ -31,11 +31,11 @@
                  <span>Notes</span>
                 </v-tooltip>
                 <v-tooltip bottom>
-                 <v-icon dark color="primary" slot="activator" @click="">edit</v-icon>
+                 <v-icon dark color="primary" slot="activator" @click="updateTestResult">edit</v-icon>
                  <span>Edit</span>
                 </v-tooltip>
                 <v-tooltip bottom>
-                 <v-icon dark color="primary" slot="activator" @click="">delete</v-icon>
+                 <v-icon dark color="primary" slot="activator" @click="removeTestResult">delete</v-icon>
                  <span>Delete</span>
                 </v-tooltip>
               </span>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import {GET_TEST_RESULTS} from '../../store/mutation-types';
+  import {GET_TEST_RESULTS, REMOVE_TEST_RESULT, UPDATE_TEST_RESULT} from '../../store/mutation-types';
   import EditResultForm from '../modals/EditResultForm.vue';
   export default {
     components: {
@@ -113,10 +113,29 @@
     created() {
       this.$store.store.dispatch(GET_TEST_RESULTS);
     },
+    methods: {
+      removeTestResult() {
+
+      },
+
+      updateTestResult() {
+
+      }
+    }
+
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+  #labstable {
+    margin-top: 5vh;
+    width: 70vw;
+  }
+
+  .headline {
+    margin-left: .25vw;
+  }
 
   i {
     cursor: pointer !important;

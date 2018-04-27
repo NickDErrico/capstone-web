@@ -34,6 +34,7 @@ export default {
                 beginAtZero: true
               },
               gridLines: {
+                drawBorder: true,
                 color: 'rgba(0, 0, 0, .2)',
                 fontColor: 'black',
                 display: true
@@ -44,6 +45,7 @@ export default {
                 fontColor: 'black'
               },
               gridLines: {
+                drawBorder: true,
                 color: 'rgba(0, 0, 0, .2)',
                 fontColor: 'black',
                 display: true

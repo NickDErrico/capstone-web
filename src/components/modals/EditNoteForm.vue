@@ -17,10 +17,10 @@
                   <v-text-field box multi-line label="Notes" v-model="noteInfo.details"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field label="Doctor" v-model="noteInfo.Doctor_id"></v-text-field>
+                  <v-text-field label="Doctor ID" v-model="noteInfo.Doctor_id"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field label="Patient" v-model="noteInfo.patient_id"></v-text-field>
+                  <v-text-field label="Patient ID" v-model="noteInfo.patient_id"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -46,8 +46,9 @@ import { ADD_NOTE, UPDATE_NOTE } from '../../store/mutation-types';
         date: "",
         detail: "",
         doctor_id: "",
-        patient_id: ""
-      }
+        patient_id: "",
+        testInfo: []
+      },
     }),
     methods: {
       addNote: function(noteInfo) {
