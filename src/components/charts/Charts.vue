@@ -30,6 +30,7 @@
 
     created( ){
       let results = this.$store.store.state.testResults;
+      console.log(results)
       let obj = {};
 
       results.map(item => {
@@ -46,7 +47,7 @@
           obj[item.name].dates.push(item.date.slice(0,10));
         }
       })
-
+      console.log(obj)
       for(let key in obj){
         this.testInfo.push(obj[key]);
       }

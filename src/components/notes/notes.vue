@@ -20,7 +20,7 @@
                 <v-list-tile-content>
                   <v-list-tile-title v-if="" v-html="item.patient_id ? item.patient_id : memo"></v-list-tile-title>
                   <b><v-list-tile-sub-title v-html="item.detail"></v-list-tile-sub-title></b>
-                  <v-list-tile-sub-title v-html="item.date.slice(0, 10)"></v-list-tile-sub-title>
+                  <v-list-tile-sub-title v-if="item.date" v-html="item.date.slice(0, 10)"></v-list-tile-sub-title>
                 </v-list-tile-content>
                   <span>
                     <v-tooltip bottom>
@@ -54,12 +54,17 @@ export default {
       props: ['patient'],
       a1: null,
       memo: "Memo to self :",
-      dailog: false
+      dailog: false,
+      patientsList: []
     }
   },
   computed:{
     notes() {
       return this.$store.store.getters.notes;
+    },
+    updatePatientsList() {
+      patientsList.push(this.$store.store.state.patients.filter(item => item.doctor_id === this.$store.store.state.doctor.id));
+      console.log(patientsList)
     }
   },
   created() {
@@ -79,6 +84,9 @@ export default {
       }
     },
     updateNote() {
+
+    },
+    getPatients() {
 
     }
   }
@@ -112,6 +120,10 @@ export default {
   }
 
   .text-xs-right {
+    cursor: default !important;
+  }
+
+  .text-xs-left {
     cursor: default !important;
   }
 

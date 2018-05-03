@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row justify-center>
       <v-flex xs12>
-        <v-dialog v-model="dialog" persistent max-width="50%">
+        <v-dialog v-model="dialog" persistent max-width="35%">
           <v-btn v-if="!hasAccount" color="primary" dark slot="activator">Register</v-btn>
           <v-btn v-if="hasAccount" color="primary" dark slot="activator">Log In</v-btn>
           <v-card>
@@ -20,12 +20,48 @@
                     <v-text-field label="last name" v-model="registerDoctor.last_name" required></v-text-field>
                   </v-flex>
                   <v-flex xs12 v-if="!hasAccount">
-                    <v-text-field label="Email" v-model="registerDoctor.email" required></v-text-field>
+                    <v-text-field label="Email" type="Email" v-model="registerDoctor.email" required></v-text-field>
                   </v-flex>
                   <v-flex xs12 v-if="!hasAccount">
-                    <v-text-field label="Password" type="password" v-model="registerDoctor.password" required></v-text-field>
+                    <v-text-field
+                    label="Password"
+                    type="password"
+                    :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
+                    :append-icon-cb="() => (hidePassword = !hidePassword)"
+                    :type="hidePassword ? 'password' : 'text'"
+                    v-model="registerDoctor.password"
+                    required>
+                    </v-text-field>
                   <v-flex xs12 v-if="!hasAccount">
-                    <v-text-field label="Confirm Password" type="password" v-model="registerDoctor.confirmPassword" required></v-text-field>
+                    <v-text-field
+                    label="Confirm Password"
+                    type="password"
+                    :append-icon-cb="() => (hidePassword = !hidePassword)"
+                    :type="hidePassword ? 'password' : 'text'"
+                    v-model="registerDoctor.confirmPassword"
+                    required>
+                    </v-text-field>
+                  </v-flex>
+                  <v-flex xs12 v-if="!hasAccount">
+                    <v-text-field
+                    label="Pin"
+                    type="pin"
+                    :append-icon-cb="() => (hidePin = !hidePin)"
+                    :append-icon="hidePin ? 'visibility_off' : 'visibility'"
+                    :type="hidePin ? 'password' : 'text'"
+                    v-model="registerDoctor.Pin"
+                    required>
+                    </v-text-field>
+                  </v-flex>
+                  <v-flex xs12 v-if="!hasAccount">
+                    <v-text-field
+                    label="Confirm Pin"
+                    type="pin"
+                    :append-icon-cb="() => (hidePin = !hidePin)"
+                    :type="hidePin ? 'password' : 'text'"
+                    v-model="registerDoctor.confirmPin"
+                    required>
+                    </v-text-field>
                   </v-flex>
                   <v-alert type="error" :value="registerFormError.show">{{registerFormError.message}}</v-alert>
                   </v-flex>
@@ -33,7 +69,26 @@
                     <v-text-field label="Email" v-model="loginDoctor.email" required></v-text-field>
                   </v-flex>
                   <v-flex xs12 v-if="hasAccount">
-                    <v-text-field label="Password" type="password" v-model="loginDoctor.password" required></v-text-field>
+                    <v-text-field
+                    label="Password"
+                    type="password"
+                    :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
+                    :append-icon-cb="() => (hidePassword = !hidePassword)"
+                    :type="hidePassword ? 'password' : 'text'"
+                    v-model="loginDoctor.password"
+                    required>
+                    </v-text-field>
+                  </v-flex>
+                  <v-flex xs12 v-if="hasAccount">
+                    <v-text-field
+                    label="Pin"
+                    type="pin"
+                    :append-icon="hidePin ? 'visibility_off' : 'visibility'"
+                    :append-icon-cb="() => (hidePin = !hidePin)"
+                    :type="hidePin ? 'password' : 'text'"
+                    v-model="loginDoctor.Pin"
+                    required>
+                    </v-text-field>
                   </v-flex>
                   <v-alert type="error" :value="loginFormError.show">{{loginFormError.message}}</v-alert>
                 </v-form>
@@ -63,6 +118,8 @@
   import { LOGIN_DOCTOR, REGISTER_DOCTOR } from "../../store/mutation-types";
   export default {
     data: () => ({
+      hidePassword: true,
+      hidePin: true,
       dialog: false,
       hasAccount: true,
       registerDoctor: {
@@ -71,10 +128,13 @@
         confirmPassword: "",
         first_name: "",
         last_name: "",
+        pin: "",
+        confirmPin: ""
       },
       loginDoctor: {
         email: "",
-        password: ""
+        password: "",
+        pin: ""
       },
       registerFormError: {
         show: false,

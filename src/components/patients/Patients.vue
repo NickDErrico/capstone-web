@@ -129,4 +129,9 @@
   .text-xs-right {
     cursor: default !important;
   }
+
+  .text-xs-left {
+    cursor: default !important;
+  }
+  
 </style>

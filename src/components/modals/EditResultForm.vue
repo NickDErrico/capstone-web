@@ -13,9 +13,6 @@
                 <v-flex xs12 sm6 md4>
                   <v-text-field label="Date" placeholder="Year/Month/Day" v-model="testResultInfo.date" required></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field label="Doctor ID" v-model="testResultInfo.doctor_id" required></v-text-field>
-                </v-flex>
                 <v-flex xs12>
                   <v-text-field label="Patient ID" v-model="testResultInfo.patient_id" required></v-text-field>
                 </v-flex>

@@ -25,9 +25,6 @@
                 <v-flex xs12>
                   <v-text-field label="Confirm Password" type="password" v-model="patientInfo.confirmPassword" required></v-text-field>
                 </v-flex>
-                <v-flex xs12>
-                  <v-text-field label="Doctor ID" required v-model="patientInfo.doctor_id"></v-text-field>
-                </v-flex>
                 <v-flex xs12 sm6>
                   <v-text-field label="Age" required v-model="patientInfo.age"></v-text-field>
                 </v-flex>
