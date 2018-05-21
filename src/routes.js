@@ -1,6 +1,6 @@
 import Home from './components/home/Home.vue';
 import Patients from './components/patients/Patients.vue';
-import Notes from './components/notes/Notes.vue';
+import Notes from './components/notes/notes.vue';
 import Appointments from './components/appointments/Appointments.vue';
 import LabsTable from './components/labs/LabsTable.vue';
 import Charts from './components/charts/Charts.vue';
