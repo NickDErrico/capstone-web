@@ -16,7 +16,7 @@ import {
   UPDATE_NOTE,
   REMOVE_NOTE
 } from "./mutation-types";
-const url = "http://localhost:8000";
+const url = "https://pacific-citadel-59194.herokuapp.com/";
 import axios from "axios";
 export const actions = {
   // Context is store itself and payload is the data
