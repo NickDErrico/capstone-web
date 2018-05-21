@@ -13,6 +13,10 @@ export const getters = {
 
   notes: (state) => {
     return state.notes.length > 0 ? state.notes : false;
+  },
+
+  getPatientName: (state) => id => {
+    return state.patients.filter(patient => patient.id == id)[0]
   }
   
 };

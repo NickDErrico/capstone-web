@@ -56,9 +56,9 @@ import { ADD_TEST_RESULT, UPDATE_TEST_RESULT } from '../../store/mutation-types'
     }),
     methods: {
       addTestResult: function(testResultInfo) {
-        console.log('definitely running here')
         this.$store.store.dispatch(ADD_TEST_RESULT, testResultInfo).then(() => {
           this.dialog = false;
+          this.$router.push("/labstable");          
         })
       },
       updateTestResult: function(testResultInfo) {

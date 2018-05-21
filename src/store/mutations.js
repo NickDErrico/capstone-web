@@ -56,9 +56,9 @@ export const mutations = {
 
   },
 
-  [REMOVE_PATIENT](state) {
+  [REMOVE_PATIENT](state, payload) {
     state.token = localStorage.getItem("doctor");
-    state.patients.splice(payload, 1)
+    state.patients = state.patients.length ? state.patients.filter(patient => patient.id != payload[0].id) : []
   },
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,10 +76,9 @@ export const mutations = {
 
   },
 
-  [REMOVE_TEST_RESULT](state) {
-    if(state.testResults.id === req.params.id) {
-      state.testResults[req.params.id] = {};
-    }
+  [REMOVE_TEST_RESULT](state, payload) {
+    state.token = localStorage.getItem("doctor");
+    state.testResults = state.testResults.length ? state.testResults.filter(result => result.id != payload[0].id) : []
   },
 
 
@@ -90,7 +89,8 @@ export const mutations = {
 
   [ADD_NOTE](state, payload) {
     state.token = localStorage.getItem("doctor");
-    state.notes.push(payload);
+    console.log('payload', payload)
+    state.notes.push(payload[0]);
   },
 
   [UPDATE_NOTE](state, payload) {
@@ -99,6 +99,6 @@ export const mutations = {
 
   [REMOVE_NOTE](state, payload) {
     state.token = localStorage.getItem("doctor");
-    state.notes.splice([payload[0].id], 1)
+    state.notes = state.notes.length ? state.notes.filter(note => note.id != payload[0].id) : []
   },
 };

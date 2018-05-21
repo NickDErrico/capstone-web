@@ -14,10 +14,10 @@
                   <v-text-field label="date" placeholder="Year-Month-Day" v-model="noteInfo.date"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm12 md12>
-                  <v-text-field box multi-line label="Notes" v-model="noteInfo.details"></v-text-field>
+                  <v-text-field box multi-line label="Notes" v-model="noteInfo.detail"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field label="Doctor ID" v-model="noteInfo.Doctor_id"></v-text-field>
+                  <v-text-field label="Doctor ID" v-model="noteInfo.doctor_id"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
                   <v-text-field label="Patient ID" v-model="noteInfo.patient_id"></v-text-field>

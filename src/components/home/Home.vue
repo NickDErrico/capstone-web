@@ -10,11 +10,12 @@
             <h1 class="display-1">Helping connect doctors to their patients and patients to their health.</h1>
           </div>
           <div class="mission-statement">
-            <h2>Our mission at Healthy Me &#8482; is to make keeping up with your health as painless as possible.
-            With our clean <br /> and simple design user will be able to traverse their health as easily as they will Healthy Me &#8482;.
-            Health Me &#8482; <br /> using cutting edge data visualization tools so patients and doctor won't have to worry about
-            translating cryptic <br />test results, Healthy Me &#8482; takes care of that. Healthy Me &#8482; will allow your doctors
-            more time to connect with<br /> you on a more personal level making trips to the doctors office enjoyable. </h2>
+            <h2>
+              Our mission at Healthy Me &#8482; is to make keeping up with your health as painless as possible.<br>
+              With our clean and simple design users will be able to traverse their health as easily as a click of a button.<br>
+              Using cutting edge data visualization tools so patients and doctor won't have to worry about test results,<br> Healthy Me takes care of that.
+              Healthy Me will allow your doctors more time to connect with you on a more<br> personal level making trips to the doctors office enjoyable. 
+            </h2>
           </div>
           <Modal />
         </v-flex>

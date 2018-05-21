@@ -97,7 +97,7 @@ export const actions = {
         reject();
       }
       axios.post(`${url}/patients`, {'payload': payload, 'token': token}).then((result) => {
-        context.commit(ADD_PATIENT, result.data);
+        context.commit(ADD_PATIENT, result.data[0]);
         resolve();
       }).catch((err) => {
         console.log(err);
@@ -109,10 +109,13 @@ export const actions = {
   [REMOVE_PATIENT](context, payload) {
     return new Promise((resolve, reject) => {
       let token = localStorage.getItem("doctor");
-      if(!token){
+      if (!token) {
         reject();
       }
-      axios.post(`${url}/patients`, {'payload': payload, 'token': token}).then((result) => {
+      axios.delete(`${url}/patients/${payload.id}?token=${token}`, {
+        'payload': payload,
+        'token': token
+      }).then((result) => {
         context.commit(REMOVE_PATIENT, result.data);
         resolve();
       }).catch((err) => {
@@ -131,7 +134,8 @@ export const actions = {
         reject();
       }
       axios.get(`${url}/results?token=${token}`).then((result)=>{
-        context.commit(GET_TEST_RESULTS, result.data);
+        let sortedResult = result.data.sort((a,b) => a.id - b.id)
+        context.commit(GET_TEST_RESULTS, sortedResult);
       })
       .catch((err) => {
         console.log(err);
@@ -148,7 +152,7 @@ export const actions = {
       }
       axios.post(`${url}/results`, {'payload': payload, 'token': token}).then((result) => {
         console.log(payload)
-        context.commit(ADD_TEST_RESULT, result.data);
+        context.commit(ADD_TEST_RESULT, result.data[0]);
         resolve();
       }).catch((err) => {
         console.log(err);
@@ -157,15 +161,18 @@ export const actions = {
     })
   },
 
-  [REMOVE_TEST_RESULT](context) {
+  [REMOVE_TEST_RESULT](context, payload) {
     return new Promise((resolve, reject) => {
       let token = localStorage.getItem("doctor");
-      if(!token) {
+      if (!token) {
         reject();
       }
-      axios.post(`${url}/results`, {'payload': payload, 'token': token}).then((result) => {
-      context.commit(REMOVE_TEST_RESULT);
-      resolve();
+      axios.delete(`${url}/results/${payload.id}?token=${token}`, {
+        'payload': payload,
+        'token': token
+      }).then((result) => {
+        context.commit(REMOVE_TEST_RESULT, result.data);
+        resolve();
       }).catch((err) => {
         console.log(err);
         reject();
@@ -213,7 +220,7 @@ export const actions = {
       if(!token){
         reject();
       }
-      axios.delete(`${url}/notes/${payload[0].id}?token=${token}`, {'payload': payload, 'token': token}).then((result) => {
+      axios.delete(`${url}/notes/${payload.id}?token=${token}`, {'payload': payload, 'token': token}).then((result) => {
         context.commit(REMOVE_NOTE, result.data);
         resolve();
       }).catch((err) => {
@@ -222,4 +229,5 @@ export const actions = {
       })
     })
   },
+
 };

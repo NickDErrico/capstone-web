@@ -35,7 +35,7 @@
                  <span>Edit</span>
                 </v-tooltip>
                 <v-tooltip bottom>
-                 <v-icon dark color="primary" slot="activator" @click="removeTestResult">delete</v-icon>
+                 <v-icon dark color="primary" slot="activator" @click="removeTestResult(testResults.item.id)">delete</v-icon>
                  <span>Delete</span>
                 </v-tooltip>
               </span>
@@ -114,9 +114,12 @@
       this.$store.store.dispatch(GET_TEST_RESULTS);
     },
     methods: {
-      removeTestResult() {
-
-      },
+      removeTestResult(id) {
+      if(id) {
+      let currTestResult = this.$store.store.state.testResults.filter(item => item.id === id)[0]
+        this.$store.store.dispatch(REMOVE_TEST_RESULT, currTestResult)
+      }
+    },
 
       updateTestResult() {
 

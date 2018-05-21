@@ -12,13 +12,13 @@
             <v-toolbar-title>Notes</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
-          <v-list two-line>
+          <v-list two-line v-if="notes">
             <template v-for="(item, index) in notes">
               <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
               <v-divider v-else-if="item.divider" :inset="item.inset" :key="item.patient_id"></v-divider>
-              <v-list-tile avatar v-else :key="item.title" @click="">
+              <v-list-tile avatar v-else :key="item.title">
                 <v-list-tile-content>
-                  <v-list-tile-title v-if="" v-html="item.patient_id ? item.patient_id : memo"></v-list-tile-title>
+                  <v-list-tile-title v-html="item.patient ? item.patient.last_name + ', ' + item.patient.first_name : memo"></v-list-tile-title>
                   <b><v-list-tile-sub-title v-html="item.detail"></v-list-tile-sub-title></b>
                   <v-list-tile-sub-title v-html="item.date.slice(0, 10)"></v-list-tile-sub-title>
                 </v-list-tile-content>
@@ -36,6 +36,7 @@
               <v-divider></v-divider>
             </template>
           </v-list>
+          <!-- <p v-else> You have no notes </p> -->
         </v-card>
       </v-flex>
     </v-layout>
@@ -59,8 +60,13 @@ export default {
   },
   computed:{
     notes() {
-      return this.$store.store.getters.notes;
-    }
+      let notesList = this.$store.store.getters.notes;
+      let updatedNotes = notesList ? notesList.map(note => {
+        note.patient = this.$store.store.getters.getPatientName(note.patient_id)
+        return note
+      }) : false
+      return updatedNotes;
+    },
   },
   created() {
     this.$store.store.dispatch(GET_NOTES);
@@ -74,7 +80,7 @@ export default {
     },
     removeNote(id) {
       if(id) {
-      let currNote = this.$store.store.state.notes.filter(item => item.id === id)
+      let currNote = this.$store.store.state.notes.filter(item => item.id === id)[0]
         this.$store.store.dispatch(REMOVE_NOTE, currNote)
       }
     },

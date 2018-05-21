@@ -35,7 +35,7 @@
                        <span>Edit</span>
                       </v-tooltip>
                       <v-tooltip bottom>
-                       <v-icon dark color="primary" slot="activator" @click="removePatient">delete</v-icon>
+                       <v-icon dark color="primary" slot="activator" @click="removePatient(patients.item.id)">delete</v-icon>
                        <span>Delete</span>
                       </v-tooltip>
                     </span>
@@ -98,9 +98,12 @@
       this.$store.store.dispatch(GET_PATIENTS);
     },
     methods: {
-      removePatient() {
-
-      },
+      removePatient(id) {
+      if(id) {
+      let currPatient = this.$store.store.state.patients.filter(item => item.id === id)[0]
+        this.$store.store.dispatch(REMOVE_PATIENT, currPatient)
+      }
+    },
       updatePatient() {
 
       }

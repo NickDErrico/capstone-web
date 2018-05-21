@@ -30,9 +30,10 @@
 
     created( ){
       let results = this.$store.store.state.testResults;
+      console.log('results', results)
       let obj = {};
-
-      results.map(item => {
+      results.filter(item => item.patient_id == this.$route.params.id).map(item => {
+        console.log('item', item)
         if(!obj[item.name]) {
           obj[item.name] = {
             name: item.name,
